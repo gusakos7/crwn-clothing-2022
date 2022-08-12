@@ -23,13 +23,14 @@ const SignInForm = () => {
   };
 
   const handleSubmit = async event => {
+    console.log("form submitted");
     event.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
+      console.log(user);
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
