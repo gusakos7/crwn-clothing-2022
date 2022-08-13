@@ -38,7 +38,6 @@ const SignUpForm = () => {
       if (error.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
       } else {
-        console.log(error);
       }
     }
   };
@@ -46,8 +45,6 @@ const SignUpForm = () => {
   const handleChange = ({ target: { value, name } }) => {
     setFormFields(prevState => ({ ...prevState, [name]: value }));
   };
-
-  console.log(formFields);
 
   return (
     <div className="sign-up-container">

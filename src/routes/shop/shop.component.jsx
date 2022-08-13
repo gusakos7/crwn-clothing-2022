@@ -1,16 +1,27 @@
-import { useContext } from "react";
-import ProductCard from "../../components/product-card/product-card.component";
-import { ProductsContext } from "../../contexts/products.context";
-import "./shop.styles.scss";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import CategoriesPreview from "../categories-preview/categories-preview.component";
+import Category from "../category/category.component";
+import { setCategories } from "../../store/categories/categories.action";
+import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
 const Shop = () => {
-  const { products } = useContext(ProductsContext);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoriesArray = await getCategoriesAndDocuments();
+      dispatch(setCategories(categoriesArray));
+    };
+    getCategoriesMap();
+  }, []);
   return (
-    <div className="products-container">
-      {products.map(product => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+      <Route path=":category" element={<Category />} />
+    </Routes>
   );
 };
 

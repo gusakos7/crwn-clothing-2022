@@ -5,7 +5,7 @@ import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPES_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
 const defaultFormFields = {
@@ -23,14 +23,12 @@ const SignInForm = () => {
   };
 
   const handleSubmit = async event => {
-    console.log("form submitted");
     event.preventDefault();
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(user);
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -42,7 +40,6 @@ const SignInForm = () => {
 
           break;
         default:
-          console.log(error);
           break;
       }
     }
@@ -75,7 +72,11 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign in</Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPES_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
             Sign in with Google
           </Button>
         </div>
