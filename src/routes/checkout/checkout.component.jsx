@@ -5,11 +5,11 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../store/cart/cart.selectors";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
-
   return (
     <div className="checkout-container">
       <div className="checkout-header">
@@ -30,10 +30,11 @@ const Checkout = () => {
         </div>
       </div>
       {cartItems &&
-        cartItems.map(product => (
+        cartItems.map((product) => (
           <CheckoutItem key={product.id} product={product} />
         ))}
       <span className="total">Total: {cartTotal}&euro;</span>
+      <PaymentForm />
     </div>
   );
 };
