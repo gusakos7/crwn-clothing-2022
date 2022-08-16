@@ -17,8 +17,6 @@ const App = () => {
     dispatch(checkUserSession());
   }, []);
 
-  console.log(process.env);
-
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
