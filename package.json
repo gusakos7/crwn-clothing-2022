@@ -60,5 +60,11 @@
   },
   "devDependencies": {
     "babel-plugin-macros": "^3.1.0"
+  },
+  "react-dotenv": {
+    "whitelist": [
+      "REACT_APP_PUBLISHABLE_KEY",
+      "STRIPE_SECRET_KEY"
+    ]
   }
 }

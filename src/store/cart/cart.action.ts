@@ -73,7 +73,7 @@ export const addItemToCart = (
   cartItems: CartItem[],
   productToAdd: CategoryItem
 ): SetCartItems => {
-  const newCartItems = addCartItem([], productToAdd);
+  const newCartItems = addCartItem(cartItems, productToAdd);
   return setCartItems(newCartItems);
 };
 

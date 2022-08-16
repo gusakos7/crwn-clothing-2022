@@ -12,11 +12,24 @@ const PaymentForm = () => {
     e.preventDefault();
 
     if (!stripe || !elements) return;
+
+    console.log(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+    const response = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount: "10000" }),
+    })
+      .then((res) => res.json())
+      .catch((e) => console.log(e));
+
+    console.log(response);
   };
 
   return (
     <PaymentFormContainer>
-      <FormContainer>
+      <FormContainer onSubmit={paymentHandler}>
         <h2>Credit Card Payment: </h2>
         <CardElement />
         <Button buttonType={BUTTON_TYPES_CLASSES.inverted}>Pay now</Button>
