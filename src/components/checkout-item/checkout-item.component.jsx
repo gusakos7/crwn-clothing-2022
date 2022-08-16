@@ -17,8 +17,9 @@ import {
   Value,
   RemoveButton,
 } from "./checkout-item.styles";
+import { memo } from "react";
 
-const CheckoutItem = ({ product }) => {
+const CheckoutItem = memo(({ product }) => {
   const { imageUrl, name, quantity, price } = product;
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
@@ -46,6 +47,6 @@ const CheckoutItem = ({ product }) => {
       </RemoveButton>
     </CheckoutItemContainer>
   );
-};
+});
 
 export default CheckoutItem;
